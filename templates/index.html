@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MedTrack — Modern healthcare management platform for doctors and patients. Smart scheduling, digital records, and effortless care.">
+    <title>MedTrack | Modern Healthcare Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- TOP NAVBAR -->
+    <header class="navbar">
+        <a href="/" class="brand-logo">
+            <div class="brand-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h2l1-2 2 4 1-2h2"></path>
+                </svg>
+            </div>
+            <span>Med<span class="text-gradient">Track</span></span>
+        </a>
+
+        <div class="nav-right-group">
+            <nav class="nav-links">
+                <a href="/" class="nav-link active">Home</a>
+                <a href="/login" class="nav-link">Sign In</a>
+                <a href="/register" class="btn btn-primary btn-sm">Get Started</a>
+            </nav>
+
+            <!-- Dual Theme Switch Button -->
+            <button class="theme-toggle-btn" type="button" aria-label="Toggle Theme">
+                <svg class="theme-icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="display:none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+                <svg class="theme-icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                </svg>
+                <span class="theme-label">Dark</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <main class="hero-section">
+        <div class="hero-badge">
+            <span class="auth-pill-dot"></span>
+            Next-Gen Healthcare Cloud • Seamless Doctor &amp; Patient Ecosystem
+        </div>
+
+        <h1 class="hero-title">
+            Smart Healthcare.<br>
+            <span class="text-gradient">Effortless Records.</span> Connected Care.
+        </h1>
+
+        <p class="hero-subtitle">
+            MedTrack unifies appointment booking, clinical diagnoses, medical history,
+            and doctor-patient communication into one high-performance, beautifully intuitive workspace.
+        </p>
+
+        <div class="hero-actions">
+            <a href="/register" class="btn btn-primary btn-lg">
+                <span>Get Started Free</span>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+            <a href="/login" class="btn btn-secondary btn-lg">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                </svg>
+                <span>Sign In to Portal</span>
+            </a>
+        </div>
+
+        <!-- HERO PLATFORM PREVIEW MOCKUP -->
+        <div class="hero-mockup-wrapper">
+            <div class="mockup-header">
+                <div class="mockup-dots">
+                    <div class="mockup-dot red"></div>
+                    <div class="mockup-dot yellow"></div>
+                    <div class="mockup-dot green"></div>
+                </div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                    <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-emerald);"></span>
+                    Live Clinical Portal • Encrypted TLS 1.3
+                </div>
+            </div>
+
+            <div class="mockup-inner-grid">
+                <!-- Preview Card 1: Appointment -->
+                <div style="background: var(--bg-surface); padding: 18px; border-radius: 14px; border: 1px solid var(--border-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <span class="badge badge-scheduled">Upcoming Visit</span>
+                        <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Today, 10:30 AM</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                        <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                            SJ
+                        </div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: var(--text-primary);">Dr. Sarah Jenkins</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">Cardiology Specialist</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-secondary); background: var(--bg-surface-subtle); padding: 8px 12px; border-radius: 8px;">
+                        Routine quarterly cardiovascular checkup &amp; ECG review
+                    </div>
+                </div>
+
+                <!-- Preview Card 2: Health Record -->
+                <div style="background: var(--bg-surface); padding: 18px; border-radius: 14px; border: 1px solid var(--border-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <span class="badge badge-completed">Verified Diagnosis</span>
+                        <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Dr. M. Vance</span>
+                    </div>
+                    <div style="font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">
+                        Prescription &amp; Clinical Notes
+                    </div>
+                    <div style="font-size: 12px; color: var(--accent-emerald); font-weight: 600; margin-bottom: 6px;">
+                        💊 Amoxicillin 500mg • 2x daily after meals
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-muted);">
+                        Patient vitals normal. Follow-up recommended in 3 weeks.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS COUNTERS -->
+        <div class="hero-stats-grid">
+            <div class="hero-stat-card">
+                <div class="hero-stat-number text-gradient">10K+</div>
+                <div class="hero-stat-label">Active Patients Managed</div>
+            </div>
+            <div class="hero-stat-card">
+                <div class="hero-stat-number text-gradient">500+</div>
+                <div class="hero-stat-label">Verified Medical Specialists</div>
+            </div>
+            <div class="hero-stat-card">
+                <div class="hero-stat-number text-gradient">99.9%</div>
+                <div class="hero-stat-label">Cloud Availability SLA</div>
+            </div>
+            <div class="hero-stat-card">
+                <div class="hero-stat-number text-gradient">24/7</div>
+                <div class="hero-stat-label">Secure Encrypted Access</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- CORE FEATURES SECTION -->
+    <section class="features-section">
+        <div class="section-header-centered">
+            <h2>Everything Needed for Modern Healthcare</h2>
+            <p>Designed for simplicity, speed, and uncompromising clinical security.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-box">
+                <div class="feature-icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </div>
+                <h3>Smart Scheduling</h3>
+                <p>Book real-time visits with your preferred physicians. Effortless appointment requests with instant schedule visibility.</p>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-icon-wrapper" style="background: var(--accent-indigo-light); color: var(--accent-indigo);">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+                <h3>Unified Records</h3>
+                <p>Access your lifetime medical history, diagnoses, and lab notes in one unified timeline, viewable or printable on demand.</p>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-icon-wrapper" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                    </svg>
+                </div>
+                <h3>Clinical Prescriptions</h3>
+                <p>Doctors can issue structured medical diagnoses and precise dosage recommendations directly to patient records.</p>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-icon-wrapper" style="background: var(--accent-teal-light); color: var(--accent-teal);">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <h3>Role-Isolated Security</h3>
+                <p>Strict role segregation protects sensitive medical data between Patients and Doctors with encrypted authentication.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="border-top: 1px solid var(--border-color); padding: 32px 6%; text-align: center; color: var(--text-muted); font-size: 13px; position: relative; z-index: 1;">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-emerald);"></span>
+                <span>MedTrack Platform • Operational</span>
+            </div>
+            <div>
+                &copy; MedTrack Healthcare Systems. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- MAIN CLIENT JAVASCRIPT -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

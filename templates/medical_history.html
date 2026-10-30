@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View your complete medical history and prescriptions on MedTrack.">
+    <title>Medical History | MedTrack</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- MOBILE TOP BAR -->
+    <div class="mobile-nav-bar">
+        <button class="mobile-sidebar-toggle" aria-label="Open Sidebar Menu">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <a href="/" class="brand-logo" style="font-size: 18px;">
+            <span>Med<span class="text-gradient">Track</span></span>
+        </a>
+        <button class="theme-toggle-btn" type="button" aria-label="Toggle Theme" style="padding: 6px 10px;">
+            <svg class="theme-icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="display:none;">
+                <circle cx="12" cy="12" r="5"></circle>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+            </svg>
+            <svg class="theme-icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="sidebar-overlay"></div>
+
+    <div class="app-shell">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="/" class="brand-logo">
+                    <div class="brand-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h2l1-2 2 4 1-2h2"></path>
+                        </svg>
+                    </div>
+                    <span>Med<span class="text-gradient">Track</span></span>
+                </a>
+            </div>
+
+            <div class="sidebar-user-card">
+                <div class="sidebar-avatar">
+                    {{ name[0] | upper if name else 'P' }}
+                    <span class="avatar-online-dot"></span>
+                </div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name">{{ name }}</div>
+                    <div class="sidebar-user-role">Patient Records</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="sidebar-label">Main Menu</div>
+
+                <a href="{{ url_for('patient_dashboard') }}" class="sidebar-link" id="nav-dashboard">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="{{ url_for('book_appointment') }}" class="sidebar-link" id="nav-book">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Book Appointment</span>
+                </a>
+
+                <a href="{{ url_for('medical_history') }}" class="sidebar-link active" id="nav-history">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>Medical History</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="theme-toggle-btn" type="button" aria-label="Toggle Theme" style="width: 100%;">
+                    <svg class="theme-icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="display:none;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                    </svg>
+                    <svg class="theme-icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+                    <span class="theme-label">Dark Mode</span>
+                </button>
+
+                <a href="{{ url_for('logout') }}" class="sidebar-link logout-link" id="nav-logout">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN VIEWPORT -->
+        <main class="main-viewport">
+
+            <div class="dashboard-header">
+                <div>
+                    <div class="breadcrumb-trail">
+                        <span>MedTrack</span> / <span>Patient Portal</span> / Medical Records
+                    </div>
+                    <h1>Lifetime Medical History 🗂️</h1>
+                    <p>Verified record of your diagnoses, prescriptions, and clinical recommendations.</p>
+                </div>
+
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <button type="button" class="btn btn-secondary" id="print-records-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        <span>Print Records</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Toolbar & Search -->
+            <div class="table-toolbar">
+                <div class="toolbar-title-group">
+                    <h2>
+                        <span>Clinical Records</span>
+                        <span class="badge badge-indigo">{{ records | length }} Entries</span>
+                    </h2>
+                </div>
+
+                <div class="toolbar-controls">
+                    <div class="search-input-wrapper">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input
+                            type="text"
+                            id="table-search-input"
+                            class="search-input-field"
+                            placeholder="Search doctor, diagnosis, Rx..."
+                            aria-label="Filter medical history"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Records List -->
+            {% if records %}
+                <div id="records-container">
+                    {% for record in records %}
+                        <div class="medical-record-card searchable-item" id="record-card-{{ record.record_id }}">
+
+                            <div class="record-top-header">
+                                <div class="record-doctor-meta">
+                                    <div class="record-doctor-avatar">
+                                        {{ record.doctor_name[0] | upper }}
+                                    </div>
+                                    <div>
+                                        <div class="record-doctor-title">Dr. {{ record.doctor_name }}</div>
+                                        <div style="font-size: 12px; color: var(--text-muted);">Attending Physician</div>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div class="record-date-badge">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="width: 15px; height: 15px; color: var(--primary);">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        <span>{{ record.record_date }}</span>
+                                    </div>
+                                    <span class="badge badge-indigo">Verified Clinical Entry</span>
+                                </div>
+                            </div>
+
+                            <div class="record-body-sections">
+
+                                <!-- Diagnosis Section -->
+                                <div class="clinical-block">
+                                    <div class="clinical-label diagnosis-label">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="width: 14px; height: 14px;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                        </svg>
+                                        <span>Clinical Diagnosis</span>
+                                    </div>
+                                    <div class="clinical-text">
+                                        {{ record.diagnosis or "No specific diagnosis provided" }}
+                                    </div>
+                                </div>
+
+                                <!-- Prescription Section -->
+                                <div class="clinical-block">
+                                    <div class="clinical-label prescription-label">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="width: 14px; height: 14px;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                        </svg>
+                                        <span>Prescribed Medication &amp; Regimen</span>
+                                    </div>
+                                    <div class="clinical-text">
+                                        {{ record.prescription or "No medication prescribed for this visit" }}
+                                    </div>
+                                </div>
+
+                                <!-- Notes Section -->
+                                {% if record.notes %}
+                                    <div class="clinical-block">
+                                        <div class="clinical-label notes-label">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="width: 14px; height: 14px;">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                            </svg>
+                                            <span>Physician Guidance &amp; Observations</span>
+                                        </div>
+                                        <div class="clinical-text">
+                                            {{ record.notes }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div id="no-search-results" style="display: none; padding: 40px; text-align: center; color: var(--text-muted);">
+                    <p>No medical records match your search keyword.</p>
+                </div>
+
+            {% else %}
+                <div class="empty-state-card">
+                    <div class="empty-state-icon" style="background: var(--accent-indigo-light); color: var(--accent-indigo);">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>No Medical Records Yet</h3>
+                    <p>You don't have any recorded medical history yet. When a doctor completes an appointment and files a diagnosis, it will appear here permanently.</p>
+                    <a href="{{ url_for('book_appointment') }}" class="btn btn-primary" id="empty-book-btn">
+                        <span>Schedule an Appointment</span>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </a>
+                </div>
+            {% endif %}
+
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

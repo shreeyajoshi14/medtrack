@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Doctor Dashboard — MedTrack Healthcare Management">
+    <title>Doctor Dashboard | MedTrack</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- MOBILE TOP BAR -->
+    <div class="mobile-nav-bar">
+        <button class="mobile-sidebar-toggle" aria-label="Open Sidebar Menu">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <a href="/" class="brand-logo" style="font-size: 18px;">
+            <span>Med<span class="text-gradient">Track</span></span>
+        </a>
+        <button class="theme-toggle-btn" type="button" aria-label="Toggle Theme" style="padding: 6px 10px;">
+            <svg class="theme-icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="display:none;">
+                <circle cx="12" cy="12" r="5"></circle>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+            </svg>
+            <svg class="theme-icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- SIDEBAR OVERLAY FOR MOBILE -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="app-shell">
+
+        <!-- MODERN SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="/" class="brand-logo">
+                    <div class="brand-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h2l1-2 2 4 1-2h2"></path>
+                        </svg>
+                    </div>
+                    <span>Med<span class="text-gradient">Track</span></span>
+                </a>
+            </div>
+
+            <!-- Doctor Profile Card -->
+            <div class="sidebar-user-card">
+                <div class="sidebar-avatar" style="background: var(--gradient-brand);">
+                    {{ name[0] | upper if name else 'D' }}
+                    <span class="avatar-online-dot"></span>
+                </div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name">Dr. {{ name }}</div>
+                    <div class="sidebar-user-role">Licensed Physician</div>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="sidebar-nav">
+                <div class="sidebar-label">Practice Management</div>
+
+                <a href="{{ url_for('doctor_dashboard') }}" class="sidebar-link active" id="nav-dashboard">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                    <span>Appointments Dashboard</span>
+                </a>
+            </nav>
+
+            <!-- Sidebar Footer with Theme Toggle & Sign Out -->
+            <div class="sidebar-footer">
+                <button class="theme-toggle-btn" type="button" aria-label="Toggle Theme" style="width: 100%;">
+                    <svg class="theme-icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="display:none;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                    </svg>
+                    <svg class="theme-icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+                    <span class="theme-label">Dark Mode</span>
+                </button>
+
+                <a href="{{ url_for('logout') }}" class="sidebar-link logout-link" id="nav-logout">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN VIEWPORT -->
+        <main class="main-viewport">
+
+            <!-- Page Header -->
+            <div class="dashboard-header">
+                <div>
+                    <div class="breadcrumb-trail">
+                        <span>MedTrack</span> / <span>Physician Workspace</span> / Overview
+                    </div>
+                    <h1><span id="dynamic-greeting">Welcome back</span>, Dr. {{ name }} 🩺</h1>
+                    <p>Review scheduled patient consultations and issue diagnostic records.</p>
+                </div>
+            </div>
+
+            <!-- LIVE NOTIFICATIONS BANNER (NOTIFICATIONS ENTITY) -->
+            {% if notifications %}
+                <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: var(--glass-shadow);">
+                    <div style="display: flex; align-items: center; gap: 12px; overflow: hidden;">
+                        <span style="font-size: 20px;">🔔</span>
+                        <div style="font-size: 13px; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <strong>Latest Alert:</strong> {{ notifications[0].Message }}
+                        </div>
+                    </div>
+                    <span class="badge badge-cyan" style="flex-shrink: 0;">{{ notifications | length }} Alert{% if notifications | length > 1 %}s{% endif %}</span>
+                </div>
+            {% endif %}
+
+            <!-- Stats Metric Cards Row -->
+            <div class="stats-cards-grid">
+                <div class="stat-metric-card">
+                    <div class="stat-icon-bubble blue">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="stat-metric-content">
+                        <div class="stat-metric-value">{{ appointments | length }}</div>
+                        <div class="stat-metric-label">Total Assigned Patients</div>
+                    </div>
+                </div>
+
+                <div class="stat-metric-card">
+                    <div class="stat-icon-bubble amber">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-metric-content">
+                        <div class="stat-metric-value">
+                            {{ appointments | selectattr('status', 'equalto', 'Scheduled') | list | length }}
+                        </div>
+                        <div class="stat-metric-label">Scheduled Visits</div>
+                    </div>
+                </div>
+
+                <div class="stat-metric-card">
+                    <div class="stat-icon-bubble green">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-metric-content">
+                        <div class="stat-metric-value">
+                            {{ appointments | selectattr('status', 'equalto', 'Completed') | list | length }}
+                        </div>
+                        <div class="stat-metric-label">Completed Consultations</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APPOINTMENTS LIST SECTION -->
+            <div class="table-toolbar">
+                <div class="toolbar-title-group">
+                    <h2>
+                        <span>Patient Appointments</span>
+                        <span class="badge badge-cyan">{{ appointments | length }} Total</span>
+                    </h2>
+                </div>
+
+                <div class="toolbar-controls">
+                    <!-- Status Filter Chips -->
+                    <div class="filter-chips-group">
+                        <button type="button" class="filter-chip active" data-filter="all">All</button>
+                        <button type="button" class="filter-chip" data-filter="scheduled">Scheduled</button>
+                        <button type="button" class="filter-chip" data-filter="completed">Completed</button>
+                    </div>
+
+                    <!-- Live Instant Search -->
+                    <div class="search-input-wrapper">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input
+                            type="text"
+                            id="table-search-input"
+                            class="search-input-field"
+                            placeholder="Filter patient or reason..."
+                            aria-label="Filter patient appointments"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appointments Cards Grid -->
+            {% if appointments %}
+                <div class="cards-layout-grid" id="doctor-appointments-container">
+                    {% for appointment in appointments %}
+                        <div
+                            class="appointment-item-card searchable-item"
+                            data-status="{{ appointment.status | lower }}"
+                            id="appt-card-{{ appointment.appointment_id }}"
+                        >
+                            <div class="card-top-row">
+                                <div class="attendee-profile">
+                                    <div class="attendee-avatar" style="background: var(--accent-indigo-light); color: var(--accent-indigo);">
+                                        {{ appointment.patient_name[0] | upper }}
+                                    </div>
+                                    <div class="attendee-details">
+                                        <h3>{{ appointment.patient_name }}</h3>
+                                        <p>Patient ID #{{ appointment.appointment_id }}</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    {% if appointment.status == 'Completed' %}
+                                        <span class="badge badge-completed">{{ appointment.status }}</span>
+                                    {% elif appointment.status == 'Scheduled' %}
+                                        <span class="badge badge-scheduled">{{ appointment.status }}</span>
+                                    {% else %}
+                                        <span class="badge badge-pending">{{ appointment.status }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="date-time-strip">
+                                <div class="date-time-item">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    <span><strong>{{ appointment.appointment_date }}</strong></span>
+                                </div>
+                                <div class="date-time-item">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    <span><strong>{{ appointment.appointment_time }}</strong></span>
+                                </div>
+                            </div>
+
+                            <div class="appointment-reason-box">
+                                <div class="reason-tag">Chief Complaint / Reason</div>
+                                <div class="reason-content">{{ appointment.reason }}</div>
+                            </div>
+
+                            <div class="card-footer-action">
+                                <a
+                                    href="{{ url_for('add_diagnosis', appointment_id=appointment.appointment_id) }}"
+                                    class="btn btn-primary btn-sm"
+                                    id="diagnosis-btn-{{ appointment.appointment_id }}"
+                                >
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                    </svg>
+                                    <span>{% if appointment.status == 'Completed' %}Edit Diagnosis{% else %}Add Diagnosis{% endif %}</span>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- No Filter Match Placeholder -->
+                <div id="no-search-results" style="display: none; padding: 40px; text-align: center; color: var(--text-muted);">
+                    <p>No patient appointments match your search criteria.</p>
+                </div>
+
+            {% else %}
+                <div class="empty-state-card">
+                    <div class="empty-state-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h3>No Scheduled Patients Yet</h3>
+                    <p>There are currently no patient consultations assigned to your calendar. New appointments will appear here as soon as patients book.</p>
+                </div>
+            {% endif %}
+
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
